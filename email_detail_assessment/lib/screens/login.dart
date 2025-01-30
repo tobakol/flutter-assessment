@@ -34,7 +34,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     String jsonString = await rootBundle.loadString('assets/json/items.json');
     Map<String, dynamic> jsonData = json.decode(jsonString);
     setState(() {
-      final dynCategories = List<Map<String, dynamic>>.from(jsonData["DUMMY_MEALS"]);
+      final dynCategories =
+          List<Map<String, dynamic>>.from(jsonData["DUMMY_MEALS"]);
 
       for (Map<String, dynamic> dynItem in dynCategories) {
         final mealItemized = Meal.fromJson(dynItem);
@@ -53,6 +54,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     final isValid = formKey.currentState!.validate();
     if (!isValid) {
+      setState(() {
+        busy = false;
+      });
       return;
     }
     if (isValid) {
@@ -93,7 +97,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             key: formKey,
             child: Column(
               children: [
-                const SizedBox(height: 27, width: 105).spaceSymmetrically(vertical: 40),
+                const SizedBox(height: 27, width: 105)
+                    .spaceSymmetrically(vertical: 40),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: const Text(
